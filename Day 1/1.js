@@ -28,15 +28,12 @@ const rd = readline.createInterface({
 let lineNum = 0;
 let calibration = 0;
 
-console.log("Hello World");
-
 rd.on('line', function(line){
     lineNum++;
     let arr = line.split("");
     for(i = 0; i < arr.length; i++){
         if(arr[i] >= '0' && arr[i] <= '9'){
             calibration += Number(arr[i]) * 10;
-            console.log(calibration)
             break;
         }
     }
@@ -45,7 +42,6 @@ rd.on('line', function(line){
     for(i = 0; i < reverseArr.length; i++){
         if(reverseArr[i] >= '0' && reverseArr[i] <= '9'){
             calibration += Number(reverseArr[i]);
-            console.log(calibration + "rev")
             break;
         }
         

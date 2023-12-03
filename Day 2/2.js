@@ -33,13 +33,13 @@ const rd = readline.createInterface({
 
 let lineNum = 0;
 let idSum = 0;
-let idNumber = 0;
 
 let redCheck = true;
 let greenCheck = true;
 let blueCheck = true;
 
 rd.on('line', function(line){
+    
     redCheck = true;
     greenCheck = true;
     blueCheck = true;
@@ -49,10 +49,8 @@ rd.on('line', function(line){
     line = line.replaceAll(",","")
     
     let arr = line.split(" ");
-    idNumber = arr[1].replace(":","");
 
     for (let i = 0; i < arr.length; i++) {
-        
         if(arr[i] > 12 && arr[i+1] == "red"){
             redCheck = false;
             break;
@@ -65,12 +63,11 @@ rd.on('line', function(line){
             blueCheck = false
             break;
         }
-        
     }
+
     if(redCheck && greenCheck && blueCheck){
         idSum += lineNum;
     }
-    //console.log(redCheck, greenCheck, blueCheck, lineNum, idSum)
 });
 
 rd.on('close', function(){

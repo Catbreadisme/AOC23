@@ -15,7 +15,6 @@ Consider your entire calibration document. What is the sum of all of the calibra
 
 const fs = require("fs");
 const readline = require("readline");
-const { callbackify } = require("util");
 const filestream = fs.createReadStream("./Day 1/1.txt");
 
 const rd = readline.createInterface({

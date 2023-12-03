@@ -37,13 +37,11 @@ rd.on('line', function(line){
         }
     }
     
-    let reverseArr = arr.reverse();
-    for(i = 0; i < reverseArr.length; i++){
-        if(reverseArr[i] >= '0' && reverseArr[i] <= '9'){
-            calibration += Number(reverseArr[i]);
+    for(i = arr.length; i >= 0; i--){
+        if(arr[i] >= '0' && arr[i] <= '9'){
+            calibration += Number(arr[i]);
             break;
         }
-        
     }
 });
 

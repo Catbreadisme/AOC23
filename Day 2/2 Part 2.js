@@ -32,19 +32,17 @@ const rd = readline.createInterface({
     console: false
 });
 
-let lineNum = 0;
-let idSum = 0;
+let idPower = 0;
 
-let redCheck = true;
-let greenCheck = true;
-let blueCheck = true;
+let redPower;
+let greenPower;
+let bluePower;
 
 rd.on('line', function(line){
-    
-    redCheck = true;
-    greenCheck = true;
-    blueCheck = true;
-    lineNum++;
+
+    redPower = 0;
+    greenPower = 0;
+    bluePower  = 0;
 
     line = line.replaceAll(";","")
     line = line.replaceAll(",","")
@@ -52,26 +50,22 @@ rd.on('line', function(line){
     let arr = line.split(" ");
 
     for (let i = 0; i < arr.length; i++) {
-        if(arr[i] > 12 && arr[i+1] == "red"){
-            redCheck = false;
-            break;
+        if(arr[i] > redPower && arr[i+1] == "red"){
+            redPower = Number(arr[i]);
         }
-        else if(arr[i] > 13 && arr[i+1] == "green"){
-            greenCheck = false;
-            break;
+        if(arr[i] > greenPower && arr[i+1] == "green"){
+            greenPower = Number(arr[i]);
         }
-        else if(arr[i] > 14 && arr[i+1] == "blue"){
-            blueCheck = false
-            break;
+        if(arr[i] > bluePower && arr[i+1] == "blue"){
+            bluePower = Number(arr[i]);
         }
     }
-
-    if(redCheck && greenCheck && blueCheck){
-        idSum += lineNum;
+    if(redPower > 0 && greenPower > 0 && bluePower > 0){
+        idPower += redPower * greenPower * bluePower;
     }
 });
 
 rd.on('close', function(){
-    console.log(idSum)
+    console.log(idPower)
     console.log("Done");
 });

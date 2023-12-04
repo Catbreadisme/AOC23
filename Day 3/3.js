@@ -54,9 +54,8 @@ rd.on('line', function(line){
 rd.on('close', function(){
     for (let x = 0; x < array2d.length; x++) {
         for (let y = 0; y < array2d.length; y++) {
-            if (array2d[x][y] > 0) {
-                //console.log(array2d[x][y])
-                numbers.push(array2d[x][y]);   
+            if (array2d[x][y] >= 0) {
+                numbers.push(Number(array2d[x][y]));   
                 for (let i = -1; i <= 1; i++) {
                     for (let j = -1; j <= 1; j++) {
                         
@@ -94,7 +93,7 @@ rd.on('close', function(){
                                 }
                             }
                         }
-                        /* if (x == array2d.length-1) {
+                        if (x == array2d.length-1) {
                             if (i == 1) {
                                 break;
                             }
@@ -118,7 +117,7 @@ rd.on('close', function(){
                                     
                                 }
                             }
-                        } */
+                        }
                     }
                     
                 }
@@ -139,8 +138,4 @@ rd.on('close', function(){
     console.log((eval(sum)))
     console.log("Done");
 });
-
-
-
-//console.log(array2d[0])
 

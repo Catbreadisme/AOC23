@@ -33,12 +33,9 @@ const rd = readline.createInterface({
 });
 
 const opArray = ["+", "-", "*", "/", "#", "$", "@", "=", "%", "&"]
-console.log(opArray.length)
 
 let sum = "";
-
 let operator = "";
-
 let numbers = [];
 let array2d = [];
 let lineNum = 0;
@@ -52,80 +49,24 @@ rd.on('line', function(line){
 });
 
 rd.on('close', function(){
+    generateSum();
+    sum = sum.concat(0);
+    console.log((eval(sum)));
+    console.log("Done");
+});
+
+function generateSum(){
     for (let x = 0; x < array2d.length; x++) {
         for (let y = 0; y < array2d.length; y++) {
+
             if (array2d[x][y] >= 0) {
+
                 numbers.push(Number(array2d[x][y]));   
-                for (let i = -1; i <= 1; i++) {
-                    for (let j = -1; j <= 1; j++) {
-                        
-                        if (x > 0 && y > 0 && x < array2d.length -1 && y < array2d.length -1) {
-                            for (let k = 0; k < opArray.length; k++) {
-                                if (array2d[x+i][y+j] == opArray[k]) {
-                                    console.log("op = "+opArray[k]);
-                                    operator = opArray[k];
-                                    
-                                }
-                            }
-                                
-                        }
-                        if (x == 0) {
-                            if (i == -1) {
-                                i = 0
-                            }
-                            for (let k = 0; k < opArray.length; k++) {
-                                if (array2d[x+i][y+j] == opArray[k]) {
-                                    console.log("op = "+opArray[k]);
-                                    operator = opArray[k];
-                                    
-                                }
-                            }
-                        }
-                        if (y == 0) {
-                            if (j == -1) {
-                                j = 0
-                            }
-                            for (let k = 0; k < opArray.length; k++) {
-                                if (array2d[x+i][y+j] == opArray[k]) {
-                                    console.log("op = "+opArray[k]);
-                                    operator = opArray[k];
-                                    
-                                }
-                            }
-                        }
-                        if (x == array2d.length-1) {
-                            if (i == 1) {
-                                break;
-                            }
-                            for (let k = 0; k < opArray.length; k++) {
-                                if (array2d[x+i][y+j] == opArray[k]) {
-                                    console.log("op = "+opArray[k]);
-                                    operator = opArray[k];
-                                    
-                                }
-                            }
-                            
-                        }
-                        if (y == array2d.length-1) {
-                            if (j == 1) {
-                                break;
-                            }
-                            for (let k = 0; k < opArray.length; k++) {
-                                if (array2d[x+i][y+j] == opArray[k]) {
-                                    console.log("op = "+opArray[k]);
-                                    operator = opArray[k];
-                                    
-                                }
-                            }
-                        }
-                    }
-                    
-                }
-            
-            }
-            else{
-                numbers.push("+")
+                calculateOperator(x, y)
+                
+            } else{
                 if (operator != "") {
+                    numbers.push("+")
                     sum += numbers.join('');
                 }
                 numbers = [];
@@ -133,9 +74,71 @@ rd.on('close', function(){
             }
         }
     }
-    console.log(sum)
-    sum = sum.concat(0)
-    console.log((eval(sum)))
-    console.log("Done");
-});
+}
 
+function calculateOperator(x, y){
+    for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+            
+            if (x > 0 && y > 0 && x < array2d.length -1 && y < array2d.length -1) {
+                for (let k = 0; k < opArray.length; k++) {
+                    if (array2d[x+i][y+j] == opArray[k]) {
+                        operator = opArray[k];
+                        break;
+                    }
+                }                                
+            }
+
+            else if (x == 0) {
+                if (i == -1) {
+                    i = 0
+                }
+                for (let k = 0; k < opArray.length; k++) {
+                    if (array2d[x+i][y+j] == opArray[k]) {
+                        operator = opArray[k];
+                        break;
+                    }
+                }
+            }
+
+            else if (y == 0) {
+                if (j == -1) {
+                    j = 0
+                }
+                for (let k = 0; k < opArray.length; k++) {
+                    if (array2d[x+i][y+j] == opArray[k]) {                                    
+                        operator = opArray[k];
+                        break;
+                    }
+                }
+            }
+
+            else if (x == array2d.length-1) {
+                if (i == 1) {
+                    break;
+                }
+                for (let k = 0; k < opArray.length; k++) {
+                    if (array2d[x+i][y+j] == opArray[k]) {
+                        operator = opArray[k];
+                        break;
+                    }
+                }
+                
+            }
+            
+            else if (y == array2d.length-1) {
+                if (j == 1) {
+                    break;
+                }
+                for (let k = 0; k < opArray.length; k++) {
+                    if (array2d[x+i][y+j] == opArray[k]) {
+                        console.log("op = "+opArray[k]);
+                        operator = opArray[k];
+                        
+                    }
+                }
+            }
+        }
+        
+    }
+}
